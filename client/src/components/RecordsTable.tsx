@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { deleteRecord, listRecords, updateRecord } from '../api';
 import type { RecordItem } from '../types';
 
@@ -64,22 +64,23 @@ export default function RecordsTable() {
 
   return (
     <div>
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+      <div className="row">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search saved records"
-          style={{ flex: 1, padding: '8px 10px', borderRadius: 8, border: '1px solid #ddd' }}
+          type="search"
+          style={{ flex: 1 }}
         />
-        <button onClick={fetchRows}>Refresh</button>
+        <button className="button" onClick={fetchRows}>Refresh</button>
       </div>
 
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <div className="tableWrap">
+        <table>
           <thead>
             <tr>
-              <th style={{ textAlign: 'left' }}>#</th>
-              <th style={{ textAlign: 'left' }}>Name</th>
+              <th>#</th>
+              <th>Name</th>
               <th>Dates</th>
               <th>Coords</th>
               <th>Source</th>
@@ -88,7 +89,7 @@ export default function RecordsTable() {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.id} style={{ borderTop: '1px solid #eee' }}>
+              <tr key={r.id}>
                 <td>{r.id}</td>
                 <td>
                   <input
@@ -98,12 +99,12 @@ export default function RecordsTable() {
                       const v = e.target.value;
                       setRows((old) => old.map((x) => (x.id === r.id ? { ...x, input_text: v } : x)));
                     }}
-                    style={{ width: '100%', padding: '6px 8px', borderRadius: 6, border: '1px solid #ddd' }}
+                    style={{ width: '100%' }}
                   />
-                  <div style={{ fontSize: 12, color: '#666', marginTop: 4 }}>{r.resolved_name}</div>
+                  <div className="muted" style={{ fontSize: 12, marginTop: 4 }}>{r.resolved_name}</div>
                 </td>
                 <td>
-                  <div style={{ display: 'flex', gap: 6 }}>
+                  <div className="row" style={{ marginBottom: 0 }}>
                     <input
                       type="date"
                       value={r.start_date}
@@ -118,7 +119,7 @@ export default function RecordsTable() {
                   </div>
                 </td>
                 <td>
-                  <div style={{ display: 'flex', gap: 6 }}>
+                  <div className="row" style={{ marginBottom: 0 }}>
                     <input
                       type="number"
                       step="0.0001"
@@ -137,9 +138,9 @@ export default function RecordsTable() {
                 </td>
                 <td>{r.source}</td>
                 <td style={{ whiteSpace: 'nowrap' }}>
-                  <button disabled={savingId === r.id} onClick={() => onUpdate(r)}>{savingId === r.id ? 'Saving…' : 'Update'}</button>{' '}
-                  <button onClick={() => setExpanded(expanded === r.id ? null : r.id)}>{expanded === r.id ? 'Hide' : 'View'}</button>{' '}
-                  <button onClick={() => onDelete(r.id)} style={{ color: '#b00020' }}>Delete</button>{' '}
+                  <button className="button" disabled={savingId === r.id} onClick={() => onUpdate(r)}>{savingId === r.id ? 'Saving…' : 'Update'}</button>{' '}
+                  <button className="button" onClick={() => setExpanded(expanded === r.id ? null : r.id)}>{expanded === r.id ? 'Hide' : 'View'}</button>{' '}
+                  <button className="button" onClick={() => onDelete(r.id)} style={{ color: 'var(--danger)' }}>Delete</button>{' '}
                   <a href={`/api/records/export?format=md&id=${r.id}`} target="_blank">MD</a>{' | '}
                   <a href={`/api/records/export?format=csv&id=${r.id}`} target="_blank">CSV</a>{' | '}
                   <a href={`/api/records/export?format=xml&id=${r.id}`} target="_blank">XML</a>{' | '}
@@ -152,7 +153,7 @@ export default function RecordsTable() {
       </div>
 
       {rows.map((r) => (
-        <div key={`exp-${r.id}`} style={{ display: expanded === r.id ? 'block' : 'none', border: '1px solid #eee', borderRadius: 8, padding: 12, marginTop: 10 }}>
+        <div key={`exp-${r.id}`} className="panel" style={{ display: expanded === r.id ? 'block' : 'none', marginTop: 10 }}>
           <div style={{ marginBottom: 8, fontWeight: 600 }}>{r.resolved_name} — {r.start_date} → {r.end_date}</div>
           <Summary record={r} />
         </div>

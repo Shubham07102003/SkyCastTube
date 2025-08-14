@@ -1,51 +1,125 @@
+/* Layout */
 #root {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 24px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.appHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.brand {
+  font-size: 22px;
+  font-weight: 800;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Components */
+.button {
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.04));
+  color: var(--text);
+}
+.button:hover { border-color: var(--primary); }
+.button.primary {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border-color: transparent;
 }
 
-.card {
-  padding: 2em;
+.tabs button {
+  background: transparent;
+}
+.tabs .active {
+  color: var(--primary);
+  border-color: var(--primary);
 }
 
-.read-the-docs {
-  color: #888;
+.panel {
+  background: color-mix(in oklab, var(--panel), transparent 20%);
+  border: 1px solid color-mix(in oklab, var(--border), transparent 30%);
+  border-radius: 16px;
+  padding: 16px;
+  backdrop-filter: blur(8px) saturate(1.15);
+  -webkit-backdrop-filter: blur(8px) saturate(1.15);
 }
+
+.toolbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.muted { color: var(--muted); }
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+input[type="search"],
+select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* Cards */
+.forecastGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+}
+.forecastCard {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  background: var(--surface);
+}
+.forecastDate { font-weight: 700; }
+.forecastIcon { font-size: 24px; }
+
+/* Table */
+.tableWrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 8px; }
+thead th { color: var(--muted); font-weight: 700; }
+tbody tr { border-top: 1px solid var(--border); }
+
+/* Modal */
+.modalOverlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 1000; }
+.modalCard { background: var(--panel); color: var(--text); width: min(880px, 95vw); max-height: 85vh; overflow: auto; border-radius: 12px; padding: 16px 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); text-align: left; }
+.modalCard ul { padding-left: 20px; }
+.closeButton { background: transparent; border: none; font-size: 20px; line-height: 1; cursor: pointer; color: var(--text); }
+
+.footer { margin-top: 16px; color: var(--muted); text-align: center; }
+
+/* Videos */
+.videoGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.videoCard { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--surface); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+.videoCard:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+.videoThumb { width: 100%; height: auto; display: block; }
+.videoBody { padding: 12px; }
+.videoTitle { font-weight: 700; font-size: 14px; line-height: 1.3; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.videoMeta { color: var(--muted); font-size: 12px; }
