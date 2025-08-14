@@ -1,4 +1,4 @@
-## SkyCastTube — Weather Intelligence Dashboard
+## SkyCastTube: Weather Intelligence Dashboard
 
 SkyCastTube is a full‑stack weather and media dashboard that lets you search any location, view current conditions and a 5‑day outlook, save queries to a local database, and export your data in multiple formats. It also surfaces weather‑related YouTube videos for the selected location.
 
