@@ -1,5 +1,8 @@
 ## SkyCastTube: Weather Intelligence Dashboard
 
+<img width="993" height="838" alt="image" src="https://github.com/user-attachments/assets/474e56ee-ae41-482d-bb5d-d2fb9cad761b" />
+
+
 SkyCastTube is a full‑stack weather and media dashboard that lets you search any location, view current conditions and a 5‑day outlook, save queries to a local database, and export your data in multiple formats. It also surfaces weather‑related YouTube videos for the selected location.
 
 This project was created as an assignment for the Product Manager Accelerator (PMA) Program.
