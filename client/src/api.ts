@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { GeocodeResult, RecordItem } from './types';
 
 export const api = axios.create({
-  baseURL: '/', // proxied to http://localhost:3001 by Vite
+  baseURL: 'https://skycastude-backend.onrender.com', // proxied to http://localhost:3001 by Vite
   timeout: 20000,
 });
 
